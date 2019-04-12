@@ -1,3 +1,48 @@
 [submodule "Drivers/Hypoxia"]
 	path = Drivers/Hypoxia
 	url = https://github.com/eDrivers/Hypoxia.git
+[submodule "Drivers/Acidification"]
+	path = Drivers/Acidification
+	url = https://github.com/eDrivers/Acidification.git
+[submodule "Drivers/Aquaculture"]
+	path = Drivers/Aquaculture
+	url = https://github.com/eDrivers/Aquaculture.git
+[submodule "Drivers/CoastalDevelopment"]
+	path = Drivers/CoastalDevelopment
+	url = https://github.com/eDrivers/CoastalDevelopment.git
+[submodule "Drivers/DirectHumanImpact"]
+	path = Drivers/DirectHumanImpact
+	url = https://github.com/eDrivers/DirectHumanImpact.git
+[submodule "Drivers/Fisheries"]
+	path = Drivers/Fisheries
+	url = https://github.com/eDrivers/Fisheries.git
+[submodule "Drivers/InorganicPollution"]
+	path = Drivers/InorganicPollution
+	url = https://github.com/eDrivers/InorganicPollution.git
+[submodule "Drivers/InvasiveSpecies"]
+	path = Drivers/InvasiveSpecies
+	url = https://github.com/eDrivers/InvasiveSpecies.git
+[submodule "Drivers/MarinePollution"]
+	path = Drivers/MarinePollution
+	url = https://github.com/eDrivers/MarinePollution.git
+[submodule "Drivers/NutrientInput"]
+	path = Drivers/NutrientInput
+	url = https://github.com/eDrivers/NutrientInput.git
+[submodule "Drivers/OrganicPollution"]
+	path = Drivers/OrganicPollution
+	url = https://github.com/eDrivers/OrganicPollution.git
+[submodule "Drivers/SeaBottomTemperature"]
+	path = Drivers/SeaBottomTemperature
+	url = https://github.com/eDrivers/SeaBottomTemperature.git
+[submodule "Drivers/SeaLevel"]
+	path = Drivers/SeaLevel
+	url = https://github.com/eDrivers/SeaLevel.git
+[submodule "Drivers/SeaSurfaceTemperature"]
+	path = Drivers/SeaSurfaceTemperature
+	url = https://github.com/eDrivers/SeaSurfaceTemperature.git
+[submodule "Drivers/Shipping"]
+	path = Drivers/Shipping
+	url = https://github.com/eDrivers/Shipping.git
+[submodule "Drivers/ToxicAlgae"]
+	path = Drivers/ToxicAlgae
+	url = https://github.com/eDrivers/ToxicAlgae.git
