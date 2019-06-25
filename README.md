@@ -4,6 +4,7 @@ Repository composed of all workflows used to generate individual drivers
 characterized in the Estuary and Gulf of St. Lawrence and part of the eDrivers
 initiative.
 
+<!-- git submodule update --recursive --remote -->
 
 ## Driver repositories structure
 
