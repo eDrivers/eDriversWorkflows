@@ -22,12 +22,28 @@ source('./Integrative/LoadDrivers.R')
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                               IMPORT DRIVERS IN GRID
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-for(i in driverNames) {
+# Presence absence driver data, using max of cell values
+maxDriver <- c('AquacultureInvertebrates', 'ToxicAlgae')
+for(i in maxDriver) {
   # Rasterize data
-  r <- rasterize(x = get(i),
-                 y = appGrid,
-                 field = i,
-                 fun = mean)
+  r <- rasterize(x = get(i), y = appGrid, field = i, fun = max)
+
+  # Change layer name
+  names(r) <- i
+
+  # Save under driver name
+  assign(i, r)
+
+  # Export raster
+  save(list = i, file = paste0('./Integrative/RasterGrid-1500m2/Data/', i, '.RData'))
+}
+
+
+# Quantitative data using the mean of the overlapping cells
+quantDrivers <- driverNames[!driverNames %in% maxDriver]
+for(i in quantDrivers) {
+  # Rasterize data
+  r <- rasterize(x = get(i), y = appGrid, field = i, fun = mean)
 
   # Change layer name
   names(r) <- i
