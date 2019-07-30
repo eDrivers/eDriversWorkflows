@@ -16,7 +16,7 @@ load('./Grids/Data/RasterGrid-1000m2.RData')
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                                   IMPORT DRIVERS
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-source('./Integrative/LoadDrivers.R')
+source('./IntegrativeData/eDrivers-Grids/LoadDrivers.R')
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -52,5 +52,5 @@ for(i in quantDrivers) {
   assign(i, r)
 
   # Export raster
-  save(list = i, file = paste0('./Integrative/RasterGrid-1000m2/Data/', i, '.RData'))
+  save(list = i, file = paste0('./IntegrativeData/eDrivers-Grids/RasterGrid-1000m2/Data/', i, '.RData'))
 }
