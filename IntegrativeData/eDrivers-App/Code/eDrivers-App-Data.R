@@ -53,9 +53,10 @@ rawDrivers <- drivers
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Log-transform drivers that should be transformed
 # Name of drivers to transform
-drTrans <- c('coastDev','dirHumImpact','fisheriesDD', 'fisheriesDNH','fisheriesDNL',
-             'fisheriesPHB','fisheriesPLB','Hypoxia','inorgPol','invasives',
-             'nutrientInput','orgPol','negSBT','posSBT','shipping')
+drTrans <- c('CoastalDevelopment','DirectHumanImpact','FisheriesDD',
+             'FisheriesDNH','FisheriesDNL','FisheriesPHB','FisheriesPLB',
+             'Hypoxia','InorganicPollution','InvasiveSpecies','NutrientInput',
+             'OrganicPollution','NegativeSBT','PositiveSBT','Shipping')
 
 # Log transform
 id <- which(names(drivers) %in% drTrans)
@@ -105,6 +106,11 @@ for(i in 1:length(drivers)) {
   drivers[[i]][] <- ifelse(drivers[[i]][] <= 0, NA, drivers[[i]][])
 }
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#                                   MASK RASTERS
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                                   RASTER STACKS
@@ -114,6 +120,25 @@ rawDrivers <- stack(rawDrivers)
 drivers <- stack(drivers)
 hotspots <- stack(hotspots)
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#                                 MASK RASTER STACKS
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Load and transform egsl object
+load('./Grids/Data/egslSimple.RData')
+egsl <- egslSimple %>%
+        sf::st_transform(prj) %>%
+        as('Spatial')
+
+# Mask raster stacks
+rawDrivers <- mask(rawDrivers, egsl)
+drivers <- mask(drivers, egsl)
+hotspots <- mask(hotspots, egsl)
+
+# Save raster values to memory
+rawDrivers <- readAll(rawDrivers)
+drivers <- readAll(drivers)
+hotspots <- readAll(hotspots)
+
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                                   EXPORT STACKS
@@ -122,6 +147,7 @@ hotspots <- stack(hotspots)
 save(rawDrivers, file = './IntegrativeData/eDrivers-App/Data/rawDrivers.RData')
 save(drivers, file = './IntegrativeData/eDrivers-App/Data/drivers.RData')
 save(hotspots, file = './IntegrativeData/eDrivers-App/Data/hotspots.RData')
+
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                                  EXPORT MATRICES

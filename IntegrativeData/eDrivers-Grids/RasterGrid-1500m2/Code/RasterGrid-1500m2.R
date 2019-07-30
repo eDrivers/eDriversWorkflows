@@ -35,12 +35,33 @@ for(i in maxDriver) {
   assign(i, r)
 
   # Export raster
-  save(list = i, file = paste0('./Integrative/RasterGrid-1500m2/Data/', i, '.RData'))
+  save(list = i, file = paste0('./IntegrativeData/eDrivers-Grids/RasterGrid-1500m2/Data/', i, '.RData'))
+}
+
+# Point drivers that need to be given a buffer (eventually the data will be
+# properly formatted)
+ptDriver <- c('NegativeSBT','NegativeSST','PositiveSBT','PositiveSST')
+for(i in ptDriver) {
+  # Buffer around points
+  r <- st_buffer(get(i), 2000)
+
+  # Rasterize data
+  r <- rasterize(x = r, y = appGrid, field = i, fun = max)
+
+  # Change layer name
+  names(r) <- i
+
+  # Save under driver name
+  assign(i, r)
+
+  # Export raster
+  save(list = i, file = paste0('./IntegrativeData/eDrivers-Grids/RasterGrid-1500m2/Data/', i, '.RData'))
 }
 
 
+
 # Quantitative data using the mean of the overlapping cells
-quantDrivers <- driverNames[!driverNames %in% maxDriver]
+quantDrivers <- driverNames[!driverNames %in% c(maxDriver, ptDriver)]
 for(i in quantDrivers) {
   # Rasterize data
   r <- rasterize(x = get(i), y = appGrid, field = i, fun = mean)

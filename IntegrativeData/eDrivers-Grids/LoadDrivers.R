@@ -37,3 +37,18 @@ for(i in folders) {
   # Update obj list
   obj <- c(obj, newName)
 }
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#                            SELECT ONLY ST. LAWRENCE DATA
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Maybe it would be relevant to do this directly in the drivers workflows so
+# that we obtain data only for the St. Lawrence. This may not be the most
+# efficient way to do it.
+load('./Grids/Data/egslSimple.RData')
+for(i in driverNames) {
+  id0 <- get(i) %>%
+         st_intersects(egslSimple, .) %>%
+         unlist()
+
+  assign(i, get(i)[id0, ])
+}
