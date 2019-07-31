@@ -20,13 +20,13 @@ library(magrittr)
 #                           IMPORT, FORMAT & EXPORT DATA
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Get object names
-objNames <- dir('./IntegrativeData/eDrivers-Grids/RasterGrid-1500m2/Data') %>%
+objNames <- dir('./IntegrativeData/eDrivers-Grids/RasterGrid-1000m2/Data') %>%
             gsub('.RData','',.)
 
 # Create objects and import data
 for(i in objNames) {
   # Raster data
-  load(paste0('./IntegrativeData/eDrivers-Grids/RasterGrid-1500m2/Data/', i, '.RData'))
+  load(paste0('./IntegrativeData/eDrivers-Grids/RasterGrid-1000m2/Data/', i, '.RData'))
 
   # Metadata
   meta <- read_yaml(paste0('./IntegrativeData/eDrivers-Metadata/Data/', i, '.yaml'))

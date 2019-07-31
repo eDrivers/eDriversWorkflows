@@ -46,7 +46,7 @@ for(i in ptDriver) {
   r <- st_buffer(get(i), 2000)
 
   # Rasterize data
-  r <- rasterize(x = r, y = appGrid, field = i, fun = max)
+  r <- rasterize(x = r, y = rasterGrid, field = i, fun = max)
 
   # Change layer name
   names(r) <- i
@@ -59,7 +59,7 @@ for(i in ptDriver) {
 }
 
 # Quantitative data using the mean of the overlapping cells
-quantDrivers <- driverNames[!driverNames %in% maxDriver]
+quantDrivers <- driverNames[!driverNames %in% c(maxDriver,ptDriver)]
 for(i in quantDrivers) {
   # Rasterize data
   r <- rasterize(x = get(i), y = rasterGrid, field = i, fun = mean)
