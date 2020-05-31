@@ -18,6 +18,23 @@ load('./Grids/Data/RasterGrid-1000m2.RData')
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 source('./IntegrativeData/eDrivers-Grids/LoadDrivers.R')
 
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! #
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! #
+# Set projections manually
+#
+# This is problematic, will have to figure out why certain rasters do not have
+# the proper projection even though they are projected in the workflow.
+# The layers that pose a problem are those from the global datasets
+pj <- "+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+st_crs(InvasiveSpecies)$proj4string <- pj
+st_crs(MarinePollution)$proj4string <- pj
+st_crs(NutrientInput)$proj4string <- pj
+st_crs(OrganicPollution)$proj4string <- pj
+st_crs(SeaLevel)$proj4string <- pj
+st_crs(Shipping)$proj4string <- pj
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! #
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! #
+
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                               IMPORT DRIVERS IN GRID
